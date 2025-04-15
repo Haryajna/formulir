@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Prediksi Kasus DBD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
@@ -18,7 +19,7 @@
 
     .container {
       background-color: rgba(255, 255, 255, 0.95);
-      padding: 40px;
+      padding: 30px;
       border-radius: 15px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       max-width: 1000px;
@@ -30,16 +31,18 @@
       text-align: center;
       margin-bottom: 30px;
       color: #1e88e5;
+      font-size: 1.8rem;
     }
 
     label {
       display: block;
       margin: 10px 0 5px;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #333;
     }
 
-    input[type="text"], input[type="number"] {
+    input[type="text"],
+    input[type="number"] {
       width: 100%;
       padding: 10px;
       margin-bottom: 20px;
@@ -73,7 +76,8 @@
     .download-buttons {
       display: none;
       margin-top: 20px;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
       animation: fadeIn 1s ease-in-out forwards;
     }
 
@@ -90,12 +94,14 @@
       border-collapse: collapse;
       margin-top: 10px;
       margin-bottom: 20px;
+      overflow-x: auto;
     }
 
     th, td {
       border: 1px solid #ccc;
       padding: 8px;
       text-align: center;
+      font-size: 0.95rem;
     }
 
     th {
@@ -105,6 +111,37 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    canvas {
+      max-width: 100%;
+      height: auto !important;
+    }
+
+    /* RESPONSIF UNTUK HP */
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin: 20px;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+      }
+
+      .download-buttons {
+        flex-direction: column;
+      }
+
+      table {
+        font-size: 0.85rem;
+      }
     }
   </style>
 </head>
@@ -141,7 +178,7 @@
       <div id="estimasiKasus"></div>
       <p id="skorRisiko"></p>
       <p id="zonaRisiko"></p>
-      <canvas id="chartPrediksi" width="600" height="300"></canvas>
+      <canvas id="chartPrediksi"></canvas>
     </div>
 
     <div class="download-buttons">
@@ -149,6 +186,11 @@
       <button id="btnExcel">Download Excel</button>
     </div>
   </div>
+
+  <!-- Script tetap sama seperti sebelumnya -->
+  <!-- (Tidak perlu diubah agar fungsi tetap berjalan seperti aslinya) -->
+  <!-- Jika kamu ingin aku bantu juga compress menjadi .zip siap upload, tinggal bilang ya! -->
+  <!-- Script dari kode sebelumnya tetap digunakan -->
 
   <script>
     window.onload = function () {
